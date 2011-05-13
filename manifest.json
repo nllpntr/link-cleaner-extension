@@ -1,0 +1,11 @@
+{
+  "name": "Facebook Link Cleaner",
+  "version": "1.0",
+  "description": "Keeps your privacy when you click on links to external websites by removing Facebooks link checker.",
+  "permissions":["*://www.facebook.com/*"],
+  "content_scripts": [{
+    "matches": ["*://www.facebook.com/*"],
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }]
+}
