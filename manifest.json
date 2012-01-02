@@ -1,6 +1,6 @@
 {
   "name": "Facebook Link Cleaner",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Keeps your privacy when you click on links to external websites by removing Facebooks link checker.",
   "icons": {
      "16": "icon16.png",
