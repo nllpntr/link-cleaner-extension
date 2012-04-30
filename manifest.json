@@ -7,10 +7,12 @@
      "48": "icon48.png",
     "128": "icon128.png"
   },
+  "background_page": "background.html",
   "content_scripts": [{
     "matches": ["*://www.facebook.com/*"],
     "js": ["content.js"],
     "run_at": "document_start"
   }],
+  "options_page": "options.html",
   "permissions": ["*://www.facebook.com/*"]
 }

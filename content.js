@@ -1,4 +1,4 @@
-setInterval(function() {
+function facebook(options) {
     var links = document.getElementsByTagName("a");
     for(var i = 0; i < links.length; i++) {
         var link = links[i];
@@ -6,9 +6,20 @@ setInterval(function() {
             var a = link.cloneNode();
             a.innerHTML = link.innerHTML;
             a.removeAttribute("onmousedown");
-            a.setAttribute("rel", "cleaned");
-            a.setAttribute("style", "color: #3D983D;");
+            if (options.highlight) {
+                a.setAttribute("rel", "cleaned");
+                a.setAttribute("style", "color: #3D983D;");
+            }
             link.parentNode.replaceChild(a, link);
         }
     }
-}, 3000);
+}
+
+
+chrome.extension.sendRequest({method: "getOptions"}, function(response) {
+    setInterval(function() {
+        if (response.options.facebook) {
+            facebook(response.options);
+        }
+    }, 3000);
+});

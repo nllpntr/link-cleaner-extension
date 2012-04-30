@@ -1,0 +1,29 @@
+<html>
+<script>
+    // Default settings.
+    var defaults = {
+        'highlight': true,
+        'facebook': true,
+    };
+
+
+    // Load options from localStorage.
+    function load_options() {
+        var options = JSON.parse(localStorage.getItem("options"));
+        if (!options) {
+            options = defaults;
+            localStorage.setItem("options", JSON.stringify(options));
+        }
+        return options;
+    }
+
+
+    chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+        if (request.method == "getOptions") {
+          sendResponse({options: load_options()});
+        } else {
+          sendResponse({});
+        }
+    });
+</script>
+</html>

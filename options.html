@@ -1,0 +1,49 @@
+<html>
+<head><title>Link Cleaner Options</title></head>
+<style type="text/css">
+    .content {
+        margin: 0 auto;
+        width: 300px;
+    }
+    #status {
+        color: #a0a0a0;
+        height: 20px;
+        padding-top: 20px;
+        text-align: center;
+    }
+</style>
+<script>
+    // Saves options to localStorage.
+    function save_options() {
+        var options = {
+            'highlight': document.getElementById("highlight").checked,
+            'facebook': document.getElementById("facebook").checked,
+        };
+        localStorage.setItem("options", JSON.stringify(options));
+        // Update status to let user know options were saved.
+        var status = document.getElementById("status");
+        status.innerHTML = "Options Saved.";
+        setTimeout(function() {
+            status.innerHTML = "";
+        }, 750);
+    }
+
+
+    // Restores options.
+    function restore_options() {
+        var options = chrome.extension.getBackgroundPage().load_options();
+        console.log(options);
+        document.getElementById("highlight").checked = options.highlight;
+        document.getElementById("facebook").checked = options.facebook;
+    }
+</script>
+<body onload="restore_options();">
+    <div class="content">
+        <div id="status"></div>
+        <h1>Link Cleaner Options</h1>
+        <label><input type="checkbox" id="highlight" onchange="save_options();"> Highlight links. (green color)</label>
+        <h4>Clean links for</h4>
+        <label><input type="checkbox" id="facebook" onchange="save_options();"> Facebook</label>
+    </div>
+</body>
+</html>
