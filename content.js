@@ -1,5 +1,5 @@
 function facebook(options, link) {
-        if (link.rel.indexOf("nofollow") !== -1 && link.target == "_blank") {
+        if (link.hasAttribute('onmousedown') && link.rel.indexOf("nofollow") !== -1 && link.target == "_blank") {
             var a = link.cloneNode();
             a.innerHTML = link.innerHTML;
             a.removeAttribute("onmousedown");
