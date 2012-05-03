@@ -4,9 +4,9 @@ function facebook(options, link) {
             a.innerHTML = link.innerHTML;
             a.removeAttribute("onmousedown");
             if (options.highlight) {
-                a.setAttribute("rel", "cleaned");
                 a.setAttribute("style", "color: #3D983D;");
             }
+            a.setAttribute("rel", "cleaned");
             link.parentNode.replaceChild(a, link);
         }
 }
