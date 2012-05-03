@@ -1,7 +1,4 @@
-function facebook(options) {
-    var links = document.getElementsByTagName("a");
-    for(var i = 0; i < links.length; i++) {
-        var link = links[i];
+function facebook(options, link) {
         if (link.rel.indexOf("nofollow") !== -1 && link.target == "_blank") {
             var a = link.cloneNode();
             a.innerHTML = link.innerHTML;
@@ -12,14 +9,16 @@ function facebook(options) {
             }
             link.parentNode.replaceChild(a, link);
         }
-    }
 }
 
 
 chrome.extension.sendRequest({method: "getOptions"}, function(response) {
     setInterval(function() {
-        if (response.options.facebook) {
-            facebook(response.options);
+        var links = document.getElementsByTagName("a");
+        for(var i = 0, l = links.length; i < l; i++) {
+            if (response.options.facebook) {
+                facebook(response.options, links[i]);
+            }
         }
     }, 3000);
 });
