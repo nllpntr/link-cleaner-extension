@@ -7,6 +7,27 @@ function facebook(options, link) {
         a.removeAttribute("onmousedown");
         cleaned = true;
     }
+    else if (link.href.indexOf('redirect_uri=') !== -1) {
+        a = link.cloneNode();
+        a.innerHTML = link.innerHTML;
+        var redirect_uri = link.search.split('redirect_uri=')[1].split('&', 1);
+        a.setAttribute("href", decodeURIComponent(redirect_uri));
+        a.setAttribute("target", "_blank");
+        if (a.search.indexOf('fb_') !== -1) {
+            var nofb = [];
+            var params = a.search.substring(1).split('&');
+            for (var i = 0, l = params.length; i < l; i++) {
+                if (params[i].substring(0, 3) !== 'fb_') {
+                    nofb.push(params[i]);
+                }
+            }
+            a.search = nofb.join('&');
+            if (a.search === '') {
+                a.search = null;
+            }
+        }
+        cleaned = true;
+    }
     if (cleaned) {
         if (options.highlight) {
             a.setAttribute("style", "color: #3D983D;");
