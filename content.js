@@ -1,8 +1,13 @@
 function facebook(options, link) {
+    var cleaned = false;
+    var a = null;
     if (link.hasAttribute('onmousedown') && link.rel.indexOf("nofollow") !== -1 && link.target == "_blank") {
-        var a = link.cloneNode();
+        a = link.cloneNode();
         a.innerHTML = link.innerHTML;
         a.removeAttribute("onmousedown");
+        cleaned = true;
+    }
+    if (cleaned) {
         if (options.highlight) {
             a.setAttribute("style", "color: #3D983D;");
         }
