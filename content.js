@@ -1,14 +1,14 @@
 function facebook(options, link) {
-        if (link.hasAttribute('onmousedown') && link.rel.indexOf("nofollow") !== -1 && link.target == "_blank") {
-            var a = link.cloneNode();
-            a.innerHTML = link.innerHTML;
-            a.removeAttribute("onmousedown");
-            if (options.highlight) {
-                a.setAttribute("style", "color: #3D983D;");
-            }
-            a.setAttribute("rel", "cleaned");
-            link.parentNode.replaceChild(a, link);
+    if (link.hasAttribute('onmousedown') && link.rel.indexOf("nofollow") !== -1 && link.target == "_blank") {
+        var a = link.cloneNode();
+        a.innerHTML = link.innerHTML;
+        a.removeAttribute("onmousedown");
+        if (options.highlight) {
+            a.setAttribute("style", "color: #3D983D;");
         }
+        a.setAttribute("rel", "cleaned");
+        link.parentNode.replaceChild(a, link);
+    }
 }
 
 
