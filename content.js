@@ -83,6 +83,6 @@ chrome.extension.sendRequest({method: "getOptions"}, function(response) {
     if ( response.options.remove_classes) {
         var element;
     	for (var i = 0; (element = response.options.classes_to_remove[i]) != null; i++)
-	    	document.removeElementsByClassName(element);
-	}
+	    	document.removeElementsByClassName(element); 
+    }
 });
