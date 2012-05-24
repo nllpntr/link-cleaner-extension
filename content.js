@@ -36,13 +36,39 @@ function facebook(options, link) {
     }
     if (cleaned) {
         if (options.highlight) {
-            a.setAttribute("style", "color: #3D983D;");
+            a.setAttribute("style", "color: " + options.highlight_color);
         }
         a.setAttribute("rel", "cleaned");
         link.parentNode.replaceChild(a, link);
     }
 }
 
+onload=function(){
+    if (document.getElementsByClassName == undefined) {
+        document.getElementsByClassName = function(className)
+        {
+            var hasClassName = new RegExp("(?:^|\\s)" + className + "(?:$|\\s)");
+            var allElements = document.getElementsByTagName("*");
+            var results = [];
+
+            var element;
+            for (var i = 0; (element = allElements[i]) != null; i++) {
+                var elementClass = element.className;
+                if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))
+                    results.push(element);
+            }
+
+            return results;
+        }
+        document.removeElementsByClassName = function(className)
+        {
+            var elements = document.getElementsByClassName(className);
+            var element;
+            for (var i = 0; (element = elements[i]) != null; i++)
+                element.parentNode.removeChild(element);
+        }
+    }
+}
 
 chrome.extension.sendRequest({method: "getOptions"}, function(response) {
     setInterval(function() {
@@ -53,4 +79,10 @@ chrome.extension.sendRequest({method: "getOptions"}, function(response) {
             }
         }
     }, 3000);
+    
+    if ( response.options.remove_classes) {
+        var element;
+    	for (var i = 0; (element = response.options.classes_to_remove[i]) != null; i++)
+	    	document.removeElementsByClassName(element);
+	}
 });
