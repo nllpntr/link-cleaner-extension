@@ -4,9 +4,15 @@
     var defaults = {
         'highlight': true,
         'facebook': true,
+        'highlight_color' : '#3D983D',
+        'remove_ads' : true,
+        'classes_to_remove' : [ 
+            'fbEmuTracking',
+        	'fbTimelineSideAds',
+        	'ego_column'
+        ]
     };
-
-
+    
     // Load options from localStorage.
     function load_options() {
         var options = JSON.parse(localStorage.getItem("options"));
