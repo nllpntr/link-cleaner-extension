@@ -18,6 +18,8 @@
         var options = {
             'highlight': document.getElementById("highlight").checked,
             'facebook': document.getElementById("facebook").checked,
+            'highlight_color': document.getElementById("highlight_color").checked,
+            'remove_ads': document.getElementById("remove_ads").checked,
         };
         localStorage.setItem("options", JSON.stringify(options));
         // Update status to let user know options were saved.
@@ -32,18 +34,23 @@
     // Restores options.
     function restore_options() {
         var options = chrome.extension.getBackgroundPage().load_options();
-        console.log(options);
         document.getElementById("highlight").checked = options.highlight;
+        document.getElementById("highlight_color").checked = options.highlight_color;
         document.getElementById("facebook").checked = options.facebook;
+        document.getElementById("remove_ads").checked = options.remove_ads;
     }
 </script>
 <body onload="restore_options();">
     <div class="content">
         <div id="status"></div>
         <h1>Link Cleaner Options</h1>
-        <label><input type="checkbox" id="highlight" onchange="save_options();"> Highlight links. (green color)</label>
+        <label><input type="checkbox" id="highlight" onchange="save_options();"> Highlight links</label>
+        <h4>Clean links for</h4>
+        <label><input type="text" id="highlight_color" onchange="save_options();"> Highlight color</label>
         <h4>Clean links for</h4>
         <label><input type="checkbox" id="facebook" onchange="save_options();"> Facebook</label>
+        <h4>Remove Ads</h4>
+        <label><input type="checkbox" id="remove_ads" onchange="save_options();"> Remove Ads</label>
     </div>
 </body>
 </html>
